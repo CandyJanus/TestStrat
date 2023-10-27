@@ -1,0 +1,76 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <META name="viewport" content="initial-scale=0.77, user-scalable=no">
+  <title>chessboardjs Example #1001 - Start Position</title>
+  <base href="../" />
+  
+  <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU" crossorigin="anonymous">
+  <style>
+    .center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+  .noclick{
+    pointer-events: none;
+    display: none;
+  }
+
+  </style>
+
+</head>
+<body>
+<div class="center">
+  <center>
+    <!--- Begin Example HTML ------------------------------------------------------>
+    <table>
+      <tr>
+          <td>  <div id="myBoard" style="width: 400px"></div> </td>
+          <!-- <td>  <div id="lastSeen" style="width: 400px; position: absolute; left : 10px; top : 10px; pointer-events: none;"></div> </td> -->
+          <td>  <div id="lastSeen" style="width: 400px; position: absolute; left : 2px; top : 2px; pointer-events: none;"></div> </td>
+          <!-- <td>  <div id="lastSeen" style="width: 400px; position: absolute; left : 10px; top : 10px; pointer-events: none; opacity: 1;"></div> </td> -->
+          <!-- <td>  <div id="lastSeen" style="width: 400px;"></div> </td> -->
+        </tr>
+</table>
+
+
+    </td>
+    <button id="ResetBtn">Reset</button>
+    <button id="ToggleLastSeenBtn">See last known position of opponent</button>
+    
+    <div id="server-time"></div>
+    <label>You Play:<div id="order"></div>
+    </label>
+    
+    <label>Status:</label>
+    <div id="status"></div>
+    <!-- <label>FEN:</label> -->
+    <!-- <div id="fen"></div> -->
+    <!-- <label>PGN:</label>
+    <div id="pgn"></div>   -->
+    <!--- End Example HTML -------------------------------------------------------->
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script src="./chessboard.js"></script>
+    <script src="./chessboard_real.js"></script>
+    <script src="./chess.js"></script>
+    <script src="./client.js"></script>
+    <script>
+      $(document).on('touchstart', function(e) {
+    if (e.target.nodeName !== 'INPUT') {
+        e.preventDefault();
+    }
+});
+    </script>
+  
+</center>
+</div>
+
+</body>
+</html>

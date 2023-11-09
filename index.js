@@ -3,12 +3,18 @@ const fs = require("fs");
 const path = require('path')
 const PORT = process.env.PORT || 5000;
 
+//NOTE: JS browser is being used because of the chess graphics library 
+
+// static data here is the website data that doesn't change while being sent from browser to server, which in this case, is all of it
+
 const server = express()
     .use(express.static(path.join(__dirname, 'public')))
     .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const { Server } = require('ws');
 const e = require('express');
+
+//NOTE: ws stands for web socket which connects browser to server, wss stands for web socket server as in a server that a web socket connects to
 
 const wss = new Server({ server });
 
@@ -23,6 +29,7 @@ function sendMsg(client, type, msg="", move) {
   client.send(JSON.stringify(new_msg));
 }
 
+//NOTE: fen is standard chess notation
 starting_fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0'
 // starting_fen = 'rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR w KQkq d3 0 2'
 // starting_fen = 'rnbqkbnr/pppp1ppp/8/4p3/3PP3/8/PPP2PPP/RNBQKBNR w KQkq - 0 1'
@@ -42,6 +49,7 @@ function reset(){
 
 players = []
 
+//NOTE: the .on function has the specified trigger, 'connection,' upon which it runs the lambda function to do stuff, in this case send data 
 wss.on('connection', (ws) => {
     // need to verify two players connected
     console.log('Client connected');
@@ -50,10 +58,15 @@ wss.on('connection', (ws) => {
     //   msg: num_players_connected,
     //   date: Date.now()
     // };
+
+    //NOTE: to designate the order of the player, num_players_connected is a static variable within the server (that is, replaced by incoming data but not changed by the server)
+    //NOTE: this goes to the client from the server. because this is the server code, all sendMsgs in this file will go to client
     sendMsg(ws, "order", num_players_connected)
     // ws.send(JSON.stringify(msg))
     
+    //NOTE: tracks number of players. ws is the browser stream
     players.push([ws, num_players_connected])
+    //NOTE: num players connnected is currently being used as the player id
     num_players_connected += 1
     // console.log("num_players_connected: " + num_players_connected)
     if (num_players_connected < 2) {
@@ -70,6 +83,7 @@ wss.on('connection', (ws) => {
 
 
     // updating state from client message
+    //NOTE: 
     ws.onmessage = function (event) {
       // console.log(ws.client)
         var msg = JSON.parse(event.data)
@@ -83,11 +97,11 @@ wss.on('connection', (ws) => {
                 // fs.writeFile("./board.json", JSON.stringify(state), () => {return 0;})
                 fs.writeFile("./board.txt", state, () => {return 0;})
                 // console.log(ws.client)
-
-                players.forEach(element => {
-                  // console.log(element[0])
-                  if (element[0] != ws){
-                    sendMsg(element[0], 'state', msg.state, msg.move)  
+                    //NOTE: iterates over the list of players, and iterates within those player objects to 
+                players.forEach(player => {
+                  // console.log(player[0])
+                  if (player[0] != ws){
+                    sendMsg(player[0], 'state', msg.state, msg.move)  
                     // console.log("sent");
                   }
                 })

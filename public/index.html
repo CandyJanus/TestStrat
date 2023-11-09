@@ -28,17 +28,6 @@
 </head>
 <body>
 <div class="center">
-  <center>
-    <!--- Begin Example HTML ------------------------------------------------------>
-    <table>
-      <tr>
-          <td>  <div id="myBoard" style="width: 400px"></div> </td>
-          <!-- <td>  <div id="lastSeen" style="width: 400px; position: absolute; left : 10px; top : 10px; pointer-events: none;"></div> </td> -->
-          <td>  <div id="lastSeen" style="width: 400px; position: absolute; left : 2px; top : 2px; pointer-events: none;"></div> </td>
-          <!-- <td>  <div id="lastSeen" style="width: 400px; position: absolute; left : 10px; top : 10px; pointer-events: none; opacity: 1;"></div> </td> -->
-          <!-- <td>  <div id="lastSeen" style="width: 400px;"></div> </td> -->
-        </tr>
-</table>
 
 
     </td>
@@ -56,20 +45,27 @@
     <!-- <label>PGN:</label>
     <div id="pgn"></div>   -->
     <!--- End Example HTML -------------------------------------------------------->
-    <script src="./jquery-3.4.1.min.js"></script>
-    <script src="./chessboard.js"></script>
-    <script src="./chessboard_real.js"></script>
-    <script src="./chess.js"></script>
-    <script src="./client.js"></script>
+      <!--  Including the chessboardjs files:-->
+      <!-- <script src="./js/chessboard-0.3.0.js"></script>
+      <link rel="stylesheet" href="css/chessboard-0.3.0.min.css">
+
+       Including jQuery, another tool chessboardjs uses:-->
+      <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
+
+      <!---->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+      <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD" crossorigin="anonymous" speechify-initial-font-family="&quot;Times New Roman&quot;" speechify-initial-font-size="16px"></script>
+      <div id="myBoard" style="width: 400px"></div>
+
+      <script src="./main.js"></script>
     <script>
-      $(document).on('touchstart', function(e) {
-    if (e.target.nodeName !== 'INPUT') {
-        e.preventDefault();
-    }
-});
+//       $(document).on('touchstart', function(e) {
+//     if (e.target.nodeName !== 'INPUT') {
+//         e.preventDefault();
+//     }
+// });
     </script>
-  
-</center>
 </div>
 
 </body>
